@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container mt-5">
         <h2>Registro</h2>
-        <form method="POST">
+        <form method="POST"action = "new_user.php">
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -114,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>ya tienes cuenta? <a href="login.html">INICIA SESION AQUÍ</a></p>
     </div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
