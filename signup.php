@@ -1,3 +1,48 @@
+<?php
+
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $birthdate = $_POST['birthdate'];
+
+    if ($password !== $confirmPassword) {
+        echo "Las contraseñas no coinciden.";
+        exit();
+    }
+
+    $usersFile = 'sources/db/users.json';
+
+    $users = json_decode(file_get_contents($usersFile), true);
+
+    if (isset($users[$username])) {
+        echo "El nombre de usuario ya está en uso.";
+        exit();
+    }
+
+    $new_user = array(
+        "fullname" => $fullname,
+        "email" => $email,
+        "password" => password_hash($password, PASSWORD_DEFAULT),
+        "birthdate" => $birthdate,
+        "fichas" => 5000
+    );
+
+    $users[$username] = $new_user;
+
+    $users_json = json_encode($users, JSON_PRETTY_PRINT);
+
+    file_put_contents($usersFile, $users_json);
+
+    header('Location: login.html?success=1');
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -39,7 +84,7 @@
 
     <div class="container mt-5">
         <h2>Registro</h2>
-        <form>
+        <form method="POST">
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
