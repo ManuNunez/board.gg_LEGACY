@@ -9,7 +9,7 @@ class Carta {
             '11': 'J',
             '12': 'Q',
             '13': 'K',
-            '1': 'A'
+            '15': 'A'
         };
         const nombreValor = nombres[this.valor.toString()] || this.valor.toString();
         return `${nombreValor}${this.palo}.png`;
@@ -18,7 +18,7 @@ class Carta {
 
 function iniciarJuego() {
     const palos = ['D', 'C', 'H', 'S']; // Diamantes, Corazones, Picas, Tréboles
-    const valores = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']; // Valores de 1 a 13
+    const valores = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '15']; // Valores de 1 a 13
 
     // Escoge una carta aleatoria para el usuario
     const paloUsuario = palos[Math.floor(Math.random() * palos.length)];

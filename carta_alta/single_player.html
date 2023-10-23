@@ -7,22 +7,38 @@
     <title>BOARD.GG - Carta Alta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
-    <style>
-        body {
-            font-family: 'Ubuntu', sans-serif;
-        }
-
-        .carta-container {
-            display: inline-block;
-            margin: 0 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../footer.css">
 </head>
 
 <body>
 
-    <!-- Contenido de la página, incluyendo la barra de navegación y otros elementos HTML -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="../index.html">BOARD.GG</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="games.html">Ver Juegos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pricing.html">Planes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login/Sign-up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contactanos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-5 text-center">
         <h1>CARTA ALTA</h1>
@@ -32,13 +48,11 @@
             <button class="btn btn-dark btn-lg mx-2" onclick="iniciarJuego()">Iniciar Juego</button>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3" id="resultado"></div> 
+        <div class="mt-3" id="cartas-container">
             <div class="carta-container" id="carta-usuario"></div>
             <div class="carta-container" id="carta-casa"></div>
-        </div> <!-- Contenedor para las cartas -->
-
-        <div class="mt-3" id="resultado"></div> <!-- Resultado sobre las cartas -->
-
+        </div>
     </div>
 
     <footer class="bg-dark text-white text-center py-3">
