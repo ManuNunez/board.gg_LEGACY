@@ -50,9 +50,7 @@ function iniciarJuego() {
     // Determinar el ganador
     if (parseInt(valorUsuario) > parseInt(valorCasa)) {
         resultadoDiv.innerHTML = "<h2>¡El Usuario gana!</h2>";
-    } else if (parseInt(valorUsuario) < parseInt(valorCasa)) {
+    } 
+    else
         resultadoDiv.innerHTML = "<h2>¡La Casa gana!</h2>";
-    } else {
-        resultadoDiv.innerHTML = "<h2>¡Empate! La Casa gana en caso de empate.</h2>";
     }
-}
