@@ -45,15 +45,16 @@ class BlackjackGame {
         this.deck.shuffle();
 
         this.playerHand = [this.deck.drawCard(), this.deck.drawCard()];
-        this.dealerHand = [this.deck.drawCard(), this.deck.drawCard()]; // Modificado para mostrar ambas cartas
+        this.dealerHand = [this.deck.drawCard(), this.deck.drawCard()];
 
         this.displayPlayerHand();
         this.displayDealerHand();
+        this.updateBetDisplay();
     }
 
     calculateHandValue(hand) {
         let sum = 0;
-        let numAces = 0; // Para manejar el valor del as (1 u 11)
+        let numAces = 0;
 
         hand.forEach(card => {
             if (card.value === 'A') {
@@ -66,7 +67,6 @@ class BlackjackGame {
             }
         });
 
-        // Ajusta el valor del as si la suma es mayor a 21
         while (sum > 21 && numAces > 0) {
             sum -= 10;
             numAces--;
@@ -82,7 +82,7 @@ class BlackjackGame {
             const cardImage = document.createElement('img');
             cardImage.src = card.image;
             cardImage.alt = `${card.value} de ${card.suit}`;
-            cardImage.classList.add('card-image'); // Añade la clase card-image
+            cardImage.classList.add('card-image');
             playerHandElement.appendChild(cardImage);
         });
 
@@ -99,7 +99,7 @@ class BlackjackGame {
             const cardImage = document.createElement('img');
             cardImage.src = card.image;
             cardImage.alt = `${card.value} de ${card.suit}`;
-            cardImage.classList.add('card-image'); // Añade la clase card-image
+            cardImage.classList.add('card-image');
             dealerHandElement.appendChild(cardImage);
         });
 
@@ -114,19 +114,18 @@ class BlackjackGame {
             this.playerHand.push(this.deck.drawCard());
             this.displayPlayerHand();
         } else {
-            // Si la suma de los valores de la mano del jugador es mayor a 21, oculta el botón de "Tomar Carta"
             const hitButton = document.getElementById('hit-button');
             hitButton.disabled = true;
         }
     }
 
     dealerHit() {
-        this.displayDealerHand(); // Muestra las cartas del dealer primero
+        this.displayDealerHand();
         while (this.calculateHandValue(this.dealerHand) < 17) {
             this.dealerHand.push(this.deck.drawCard());
-            this.displayDealerHand(); // Muestra las cartas del dealer después de cada carta tomada
+            this.displayDealerHand();
         }
-        this.determineWinner(); // Determina el ganador después de que el dealer complete su mano
+        this.determineWinner();
     }
 
     determineWinner() {
@@ -134,16 +133,36 @@ class BlackjackGame {
         const dealerHandValue = this.calculateHandValue(this.dealerHand);
 
         if (playerHandValue <= 21 && (playerHandValue > dealerHandValue || dealerHandValue > 21)) {
-            this.displayResult("¡Ganaste!");
+            this.handleWin();
         } else if (dealerHandValue <= 21) {
-            this.displayResult("¡Dealer gana!");
+            this.handleLoss();
         } else {
-            this.displayResult("Es un empate.");
+            this.handleDraw();
         }
     }
 
-    displayResult(message) {
-        alert(message);
+    handleWin() {
+        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        betAmount *= 2;
+        alert(`¡Ganaste! Has ganado ${betAmount} fichas.`);
+        this.updateBetDisplay();
+    }
+
+    handleLoss() {
+        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        alert(`¡Dealer gana! Has perdido ${betAmount} fichas.`);
+        this.updateBetDisplay();
+    }
+
+    handleDraw() {
+        alert(`Es un empate. No pierdes ni ganas fichas.`);
+        this.updateBetDisplay();
+    }
+
+    updateBetDisplay() {
+        const betDisplay = document.getElementById('bet-display');
+        const betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        betDisplay.textContent = `Apuesta actual: ${betAmount} fichas`;
     }
 }
 
@@ -152,10 +171,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const dealButton = document.getElementById('deal-button');
     dealButton.addEventListener('click', function () {
+        const betAmount = parseInt(document.getElementById('bet-input').value, 10);
+
+        if (isNaN(betAmount) || betAmount < 5) {
+            alert("La apuesta mínima es de 5 fichas.");
+            return;
+        }
+
         game.dealInitialCards();
-        // Habilita el botón de "Tomar Carta" después de repartir las cartas
         const hitButton = document.getElementById('hit-button');
+        const standButton = document.getElementById('stand-button');
         hitButton.disabled = false;
+        standButton.disabled = false;
     });
 
     const hitButton = document.getElementById('hit-button');
@@ -167,7 +194,4 @@ document.addEventListener('DOMContentLoaded', function () {
     standButton.addEventListener('click', function () {
         game.dealerHit();
     });
-
-    // Implementa más interacciones del usuario y actualizaciones del DOM según sea necesario
-    // ...
 });

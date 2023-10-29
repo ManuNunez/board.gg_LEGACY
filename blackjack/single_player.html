@@ -40,13 +40,16 @@
 
     <div class="container mt-5">
         <h1>Blackjack</h1>
+        <label for="bet-input">Apuesta (mínimo 5 fichas): </label>
+        <input type="number" id="bet-input" min="5" step="1" required>
         <button id="deal-button" class="btn btn-primary">Repartir Cartas</button>
-        <button id="hit-button" class="btn btn-success">Tomar</button>
-        <button id="stand-button" class="btn btn-danger">Plantarse</button>
+        <button id="hit-button" class="btn btn-success" disabled>Tomar</button>
+        <button id="stand-button" class="btn btn-danger" disabled>Plantarse</button>
         <h2>Tu Mano</h2>
         <div id="player-hand"></div>
         <h2>Mano del Dealer</h2>
         <div id="dealer-hand"></div>
+        <div id="bet-display"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
