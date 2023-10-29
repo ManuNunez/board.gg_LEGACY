@@ -1,0 +1,8 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.card-image {
+    width: 80px; /* Ajusta el tamaño de acuerdo a tus preferencias */
+    height: auto;
+}

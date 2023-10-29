@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">BOARD.GG</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="games.html">Ver Juegos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pricing.html">Planes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login/Sign-up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contactanos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Blackjack</h1>
+        <button id="deal-button" class="btn btn-primary">Repartir Cartas</button>
+        <button id="hit-button" class="btn btn-success">Tomar</button>
+        <button id="stand-button" class="btn btn-danger">Plantarse</button>
+        <h2>Tu Mano</h2>
+        <div id="player-hand"></div>
+        <h2>Mano del Dealer</h2>
+        <div id="dealer-hand"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="single_player.js" defer></script>
+</body>
+
+</html>
