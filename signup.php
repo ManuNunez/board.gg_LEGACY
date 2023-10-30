@@ -1,4 +1,31 @@
-
+<?php
+    session_start();
+    if(isset($_POST['submit']))
+    {
+        $username = $_POST['username'];
+        $name = $_POST['fullname'];
+        $email = $_POST['email'];
+        $pwd = $_POST['pwd'];
+        $phone = $_POST['phone'];
+        $birth_date = $_POST['birthdate'];
+    
+    }
+    $users = json_decode(file_get_contents('sources/db/users.json'), true);
+     
+    $new_user = array(
+        "username" => $username,
+        "fullname" => $name,
+        "pwd" => $pwd,
+        "email" => $email,
+        "phone" => $phone,
+        "birth_date" => $birth_date
+    );
+    $users[$username] = $new_user;
+    $users_json = json_encode($users, JSON_PRETTY_PRINT);
+    file_put_contents('sources/db/users.json', $users_json);
+    header('Location : login.php');
+    exit();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
