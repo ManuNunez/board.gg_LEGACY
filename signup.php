@@ -18,7 +18,8 @@
         "pwd" => $pwd,
         "email" => $email,
         "phone" => $phone,
-        "birth_date" => $birth_date
+        "birth_date" => $birth_date,
+        "acount_tipe" =>"3"
     );
     $users[$username] = $new_user;
     $users_json = json_encode($users, JSON_PRETTY_PRINT);
