@@ -3,9 +3,8 @@ body {
 }
 
 .carta-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 10px;
+    width: 80px; /* Ajusta el tamaño de acuerdo a tus preferencias */
+    height: auto;
 }
+
 
