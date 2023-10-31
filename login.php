@@ -1,3 +1,38 @@
+<?php
+
+session_start();
+$username = "";
+$json_users = file_get_contents('sources/db/users.json');
+$users = json_decode($json_users, true);
+
+if(isset($_GET["username"]) && isset($_GET["pwd"]))
+{
+    $username = $_GET["username"];
+	$pwd = $_GET["pwd"];
+	
+	if (array_key_exists($username, $users))
+    {
+		if ($pwd == $users[$username]["pwd"]) 
+        {
+			$_SESSION["logged"] = true;
+			$_SESSION["username"] = $username;
+			header("Location: index.php");
+			exit();
+		}
+		else 
+		{
+			echo "Usuario u  contraseña incorrecta no encontrado";
+		}
+	}
+	else
+	{
+		echo "Usuario u  contraseña incorrecta no encontrado";
+	}
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -53,7 +88,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control" id="pwd" name="pwd" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </form>

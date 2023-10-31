@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="pwd" name="pwd" required>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirmar Contraseña:</label>
