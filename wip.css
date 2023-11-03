@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+    /* Cambia el color de fondo */
+    color: #343a40;
+    /* Cambia el color del texto */
+}
+
+.navbar {
+    background-color: #007bff;
+    /* Cambia el color de la barra de navegación */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #ffffff;
+    /* Cambia el color del texto del menú de navegación */
+}
+
+.alert {
+    background-color: #ffc107;
+    /* Cambia el color del fondo del cuadro de alerta */
+    border-color: #ffc107;
+    /* Cambia el color del borde del cuadro de alerta */
+    color: #343a40;
+    /* Cambia el color del texto del cuadro de alerta */
+}
+
+.footer {
+    background-color: #343a40;
+    /* Cambia el color de fondo del pie de página */
+    color: #ffffff;
+    /* Cambia el color del texto del pie de página */
+}
