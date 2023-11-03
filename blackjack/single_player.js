@@ -1,58 +1,86 @@
 class Card {
     constructor(suit, value) {
-        this.suit = suit;
-        this.value = value;
-        this.image = `img/cards/${value}${suit}.png`;
+        this._suit = suit;
+        this._value = value;
+        this._image = `img/cards/${value}${suit}.png`;
+    }
+
+    get suit() {
+        return this._suit;
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    get image() {
+        return this._image;
+    }
+}
+
+class NumericCard extends Card {
+    constructor(suit, value) {
+        super(suit, value);
+    }
+}
+
+class FaceCard extends Card {
+    constructor(suit, value) {
+        super(suit, value);
+    }
+
+    getPoints() {
+        return 10; // Cartas de figuras valen 10 puntos en el blackjack.
     }
 }
 
 class Deck {
     constructor() {
-        this.suits = ['H', 'D', 'C', 'S'];
-        this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-        this.cards = [];
+        this._suits = ['H', 'D', 'C', 'S'];
+        this._values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        this._cards = [];
 
-        this.suits.forEach(suit => {
-            this.values.forEach(value => {
-                this.cards.push(new Card(suit, value));
+        this._suits.forEach(suit => {
+            this._values.forEach(value => {
+                this._cards.push(new Card(suit, value));
             });
         });
     }
 
     shuffle() {
-        for (let i = this.cards.length - 1; i > 0; i--) {
+        for (let i = this._cards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+            [this._cards[i], this._cards[j]] = [this._cards[j], this._cards[i]];
         }
     }
 
     drawCard() {
-        if (this.cards.length === 0) {
+        if (this._cards.length === 0) {
             return null;
         }
-        return this.cards.pop();
+        return this._cards.pop();
     }
 }
 
 class BlackjackGame {
     constructor() {
-        this.deck = new Deck();
-        this.playerHand = [];
-        this.dealerHand = [];
+        this._deck = new Deck();
+        this._playerHand = [];
+        this._dealerHand = [];
     }
 
     dealInitialCards() {
-        this.deck.shuffle();
+        this._deck.shuffle();
 
-        this.playerHand = [this.deck.drawCard(), this.deck.drawCard()];
-        this.dealerHand = [this.deck.drawCard(), this.deck.drawCard()];
+        this._playerHand = [this._deck.drawCard(), this._deck.drawCard()];
+        this._dealerHand = [this._deck.drawCard(), this._deck.drawCard()];
 
-        this.displayPlayerHand();
-        this.displayDealerHand();
-        this.updateBetDisplay();
+        this._displayPlayerHand();
+        this._displayDealerHand();
+        this._updateBetDisplay();
     }
 
-    calculateHandValue(hand) {
+    _calculateHandValue(hand) {
         let sum = 0;
         let numAces = 0;
 
@@ -74,11 +102,10 @@ class BlackjackGame {
 
         return sum;
     }
-
-    displayPlayerHand() {
+    _displayPlayerHand() {
         const playerHandElement = document.getElementById('player-hand');
         playerHandElement.innerHTML = '';
-        this.playerHand.forEach(card => {
+        this._playerHand.forEach(card => {
             const cardImage = document.createElement('img');
             cardImage.src = card.image;
             cardImage.alt = `${card.value} de ${card.suit}`;
@@ -86,16 +113,16 @@ class BlackjackGame {
             playerHandElement.appendChild(cardImage);
         });
 
-        const playerHandValue = this.calculateHandValue(this.playerHand);
+        const playerHandValue = this._calculateHandValue(this._playerHand);
         const playerHandValueElement = document.createElement('div');
         playerHandValueElement.textContent = `Valor de la mano: ${playerHandValue}`;
         playerHandElement.appendChild(playerHandValueElement);
     }
 
-    displayDealerHand() {
+    _displayDealerHand() {
         const dealerHandElement = document.getElementById('dealer-hand');
         dealerHandElement.innerHTML = '';
-        this.dealerHand.forEach(card => {
+        this._dealerHand.forEach(card => {
             const cardImage = document.createElement('img');
             cardImage.src = card.image;
             cardImage.alt = `${card.value} de ${card.suit}`;
@@ -103,16 +130,53 @@ class BlackjackGame {
             dealerHandElement.appendChild(cardImage);
         });
 
-        const dealerHandValue = this.calculateHandValue(this.dealerHand);
+        const dealerHandValue = this._calculateHandValue(this._dealerHand);
         const dealerHandValueElement = document.createElement('div');
         dealerHandValueElement.textContent = `Valor de la mano del dealer: ${dealerHandValue}`;
         dealerHandElement.appendChild(dealerHandValueElement);
     }
 
+    _updateBetDisplay() {
+        const betDisplay = document.getElementById('bet-display');
+        const betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        betDisplay.textContent = `Apuesta actual: ${betAmount} fichas`;
+    }
+
+    _determineWinner() {
+        const playerHandValue = this._calculateHandValue(this._playerHand);
+        const dealerHandValue = this._calculateHandValue(this._dealerHand);
+
+        if (playerHandValue <= 21 && (playerHandValue > dealerHandValue || dealerHandValue > 21)) {
+            this._handleWin();
+        } else if (dealerHandValue <= 21) {
+            this._handleLoss();
+        } else {
+            this._handleDraw();
+        }
+    }
+
+    _handleWin() {
+        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        betAmount *= 2;
+        alert(`¡Ganaste! Has ganado ${betAmount} fichas.`);
+        this._updateBetDisplay();
+    }
+
+    _handleLoss() {
+        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
+        alert(`¡Dealer gana! Has perdido ${betAmount} fichas.`);
+        this._updateBetDisplay();
+    }
+
+    _handleDraw() {
+        alert(`Es un empate. No pierdes ni ganas fichas.`);
+        this._updateBetDisplay();
+    }
+
     playerHit() {
-        if (this.calculateHandValue(this.playerHand) < 21) {
-            this.playerHand.push(this.deck.drawCard());
-            this.displayPlayerHand();
+        if (this._calculateHandValue(this._playerHand) < 21) {
+            this._playerHand.push(this._deck.drawCard());
+            this._displayPlayerHand();
         } else {
             const hitButton = document.getElementById('hit-button');
             hitButton.disabled = true;
@@ -120,50 +184,14 @@ class BlackjackGame {
     }
 
     dealerHit() {
-        this.displayDealerHand();
-        while (this.calculateHandValue(this.dealerHand) < 17) {
-            this.dealerHand.push(this.deck.drawCard());
-            this.displayDealerHand();
+        this._displayDealerHand();
+        while (this._calculateHandValue(this._dealerHand) < 17) {
+            this._dealerHand.push(this._deck.drawCard());
+            this._displayDealerHand();
         }
-        this.determineWinner();
+        this._determineWinner();
     }
 
-    determineWinner() {
-        const playerHandValue = this.calculateHandValue(this.playerHand);
-        const dealerHandValue = this.calculateHandValue(this.dealerHand);
-
-        if (playerHandValue <= 21 && (playerHandValue > dealerHandValue || dealerHandValue > 21)) {
-            this.handleWin();
-        } else if (dealerHandValue <= 21) {
-            this.handleLoss();
-        } else {
-            this.handleDraw();
-        }
-    }
-
-    handleWin() {
-        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
-        betAmount *= 2;
-        alert(`¡Ganaste! Has ganado ${betAmount} fichas.`);
-        this.updateBetDisplay();
-    }
-
-    handleLoss() {
-        let betAmount = parseInt(document.getElementById('bet-input').value, 10);
-        alert(`¡Dealer gana! Has perdido ${betAmount} fichas.`);
-        this.updateBetDisplay();
-    }
-
-    handleDraw() {
-        alert(`Es un empate. No pierdes ni ganas fichas.`);
-        this.updateBetDisplay();
-    }
-
-    updateBetDisplay() {
-        const betDisplay = document.getElementById('bet-display');
-        const betAmount = parseInt(document.getElementById('bet-input').value, 10);
-        betDisplay.textContent = `Apuesta actual: ${betAmount} fichas`;
-    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
