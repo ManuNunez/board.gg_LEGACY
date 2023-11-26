@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+
+$isLoggedIn = isset($_SESSION['username']);
+
+
+if ($isLoggedIn && isset($_POST['logout'])) {
+
+    $_SESSION = array();
+
+
+    session_destroy();
+
+  
+    header('Location: index.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -30,18 +50,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login/Sign-up</a>
-                </li>
+                <?php
+                if ($isLoggedIn) {
+                   
+                    echo '<li class="nav-item"><a class="nav-link" href="#">' . $_SESSION['username'] . '</a></li>';
+                    echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
+                } else {
+                    
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contactanos</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">

@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['username']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $username = $_POST['username'];
     $name = $_POST['fullname'];
@@ -62,12 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login/Sign-up</a>
-                </li>
+                <?php
+                if ($isLoggedIn) {
+                    // Display profile or logout link
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">Perfil</a></li>';
+                } else {
+                    // Display login/signup link
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contactanos</a>
                 </li>

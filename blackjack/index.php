@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+
+$isLoggedIn = isset($_SESSION['username']);
+
+
+if ($isLoggedIn && isset($_POST['logout'])) {
+
+    $_SESSION = array();
+
+
+    session_destroy();
+
+  
+    header('Location: index.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,9 +36,8 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="../index.html">BOARD.GG</a>
+        <a class="navbar-brand" href="index.php">BOARD.GG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,19 +45,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="games.html">Ver Juegos</a>
+                    <a class="nav-link" href="games.php">Ver Juegos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pricing.html">Planes</a>
+                    <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
+                <?php
+                if ($isLoggedIn) {
+                   
+                    echo '<li class="nav-item"><a class="nav-link" href="#">' . $_SESSION['username'] . '</a></li>';
+                    echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
+                } else {
+                    
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                }
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login/Sign-up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contactanos</a>
+                    <a class="nav-link" href="contact.php">Contactanos</a>
                 </li>
             </ul>
         </div>
