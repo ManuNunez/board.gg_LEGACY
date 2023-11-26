@@ -51,8 +51,8 @@ if(isset($_GET["username"]) && isset($_GET["pwd"]))
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="index.html">BOARD.GG</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.php">BOARD.GG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,19 +60,19 @@ if(isset($_GET["username"]) && isset($_GET["pwd"]))
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="games.html">Ver Juegos</a>
+                    <a class="nav-link" href="games.php">Ver Juegos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pricing.html">Planes</a>
+                    <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Perfil</a>
+                    <a class="nav-link" href="profile.php">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login/Sign-up</a>
+                    <a class="nav-link" href="login.php">Login/Sign-up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contactanos</a>
+                    <a class="nav-link" href="contact.php">Contactanos</a>
                 </li>
             </ul>
         </div>
@@ -93,7 +93,7 @@ if(isset($_GET["username"]) && isset($_GET["pwd"]))
                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </form>
                 <br>
-                <p>aun no tienes cuenta? <a href="signup.html">REGISTRATE AQUÍ</a></p>
+                <p>aun no tienes cuenta? <a href="signup.php">REGISTRATE AQUÍ</a></p>
             </div>
         </div>
     </div>
