@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <link rel="stylesheet" href="footer.css">
 </head>
 
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php">BOARD.GG</a>
@@ -67,10 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 </li>
                 <?php
                 if ($isLoggedIn) {
-                    // Display profile or logout link
-                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">Perfil</a></li>';
+                   
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
+                    echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
-                    // Display login/signup link
+                    
                     echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
                 }
                 ?>

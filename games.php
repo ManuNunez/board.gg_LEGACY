@@ -35,6 +35,7 @@ if ($isLoggedIn && isset($_POST['logout'])) {
     <link rel="stylesheet" href="footer.css">
 </head>
 
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php">BOARD.GG</a>
@@ -53,7 +54,7 @@ if ($isLoggedIn && isset($_POST['logout'])) {
                 <?php
                 if ($isLoggedIn) {
                    
-                    echo '<li class="nav-item"><a class="nav-link" href="#">' . $_SESSION['username'] . '</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
                     echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
                     
@@ -66,7 +67,6 @@ if ($isLoggedIn && isset($_POST['logout'])) {
             </ul>
         </div>
     </nav>
-
     <div class="container mt-5">
         <div class="row">
             <!-- Tarjeta de Poker -->

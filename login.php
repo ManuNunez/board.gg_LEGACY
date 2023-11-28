@@ -51,7 +51,7 @@ if(isset($_GET["username"]) && isset($_GET["pwd"]))
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.php">BOARD.GG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,12 +65,16 @@ if(isset($_GET["username"]) && isset($_GET["pwd"]))
                 <li class="nav-item">
                     <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login/Sign-up</a>
-                </li>
+                <?php
+                if ($isLoggedIn) {
+                   
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
+                    echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
+                } else {
+                    
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contactanos</a>
                 </li>
