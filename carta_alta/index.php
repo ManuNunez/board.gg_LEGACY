@@ -32,7 +32,7 @@ if ($isLoggedIn && isset($_POST['logout'])) {
             font-family: 'Ubuntu', sans-serif;
         }
     </style>
-    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="../footer.css">
 </head>
 
 <body>
@@ -45,19 +45,19 @@ if ($isLoggedIn && isset($_POST['logout'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="games.php">Ver Juegos</a>
+                    <a class="nav-link" href="../games.php">Ver Juegos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pricing.php">Planes</a>
+                    <a class="nav-link" href="../pricing.php">Planes</a>
                 </li>
                 <?php
                 if ($isLoggedIn) {
                    
-                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="../profile.php">' . $_SESSION['username'] . '</a></li>';
                     echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
                     
-                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="../login.php">Login/Sign-up</a></li>';
                 }
                 ?>
                 <li class="nav-item">
@@ -72,13 +72,13 @@ if ($isLoggedIn && isset($_POST['logout'])) {
         <hr>
         
         <div class="d-flex justify-content-center">
-            <button class="btn btn-dark btn-lg mx-2">Buscar Partida</button>
-            <button class="btn btn-dark btn-lg mx-2">Crear Partida</button>
+            <button class="btn btn-dark btn-lg mx-2" id = "multiplayer-btn">Buscar Partida</button>
+            <button class="btn btn-dark btn-lg mx-2" id = "get_code-btn">Crear Partida</button>
         </div>
         <br>
         <div class="d-flex justify-content-center">
-            <button class="btn btn-dark btn-lg mx-2">Introducir Codigo</button>
-            <button class="btn btn-dark btn-lg mx-2" id="single_player-btn">Un solo jugador</button>
+            <button class="btn btn-dark btn-lg mx-2" id = "give_code-btn">Introducir Codigo</button>
+            <button class="btn btn-dark btn-lg mx-2" id = "single_player-btn">Un solo jugador</button>
         </div>
     </div>
 

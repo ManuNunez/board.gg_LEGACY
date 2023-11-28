@@ -1,11 +1,11 @@
 // Botón de Poker
 document.getElementById("poker-btn").addEventListener("click", function() {
-    window.location.href = "/poker/index.php";
+    window.location.href = "work_in_progress.php";
 });
 
 // Botón de Ruleta
 document.getElementById("ruleta-btn").addEventListener("click", function() {
-    window.location.href = "/ruleta/index.php";
+    window.location.href = "work_in_progress.php";
 });
 
 // Botón de Blackjack
@@ -20,10 +20,10 @@ document.getElementById("carta-alta-btn").addEventListener("click", function() {
 
 // Botón de Dados
 document.getElementById("dados-btn").addEventListener("click", function() {
-    window.location.href = "/dados/index.php";
+    window.location.href = "work__in_progress.php";
 });
 
 // Botón de Dominó
 document.getElementById("domino-btn").addEventListener("click", function() {
-    window.location.href = "/domino/index.php";
+    window.location.href = "work_in_progress.php";
 });

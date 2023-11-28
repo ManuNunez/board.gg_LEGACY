@@ -54,11 +54,11 @@ if ($isLoggedIn && isset($_POST['logout'])) {
                 <?php
                 if ($isLoggedIn) {
                    
-                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="../profile.php">' . $_SESSION['username'] . '</a></li>';
                     echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
                     
-                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="../login.php">Login/Sign-up</a></li>';
                 }
                 ?>
                 <li class="nav-item">
