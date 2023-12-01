@@ -82,7 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_profile'])) {
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
-
+                <!-- Foto de perfil con clase rounded para bordes redondeados -->
+                <img src="ruta_a_la_foto_de_perfil.jpg" alt="Foto de perfil" class="img-fluid rounded">
             </div>
             <div class="col-md-8">
                 <!-- Formulario de edición del perfil -->

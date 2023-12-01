@@ -1,23 +1,3 @@
-<?php
-session_start();
-
-
-$isLoggedIn = isset($_SESSION['username']);
-
-
-if ($isLoggedIn && isset($_POST['logout'])) {
-
-    $_SESSION = array();
-
-
-    session_destroy();
-
-  
-    header('Location: index.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -32,8 +12,8 @@ if ($isLoggedIn && isset($_POST['logout'])) {
             font-family: 'Ubuntu', sans-serif;
         }
     </style>
-    <link rel = "stylesheet" href = "styles.css">
-    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -46,19 +26,17 @@ if ($isLoggedIn && isset($_POST['logout'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../games.php">Ver Juegos</a>
+                    <a class="nav-link" href="games.php">Ver Juegos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../pricing.php">Planes</a>
+                    <a class="nav-link" href="pricing.php">Planes</a>
                 </li>
                 <?php
                 if ($isLoggedIn) {
-                   
-                    echo '<li class="nav-item"><a class="nav-link" href="../profile.php">' . $_SESSION['username'] . '</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
                     echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
-                    
-                    echo '<li class="nav-item"><a class="nav-link" href="../login.php">Login/Sign-up</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
                 }
                 ?>
                 <li class="nav-item">
@@ -72,7 +50,8 @@ if ($isLoggedIn && isset($_POST['logout'])) {
         <h1>Blackjack</h1>
         <label for="bet-input">Apuesta (mínimo 5 fichas): </label>
         <input type="number" id="bet-input" min="5" step="1" required>
-        <button id="deal-button" class="btn btn-primary">Repartir Cartas</button>
+        <button id="set-bet-button" class="btn btn-primary">Establecer Apuesta</button>
+        <button id="deal-button" class="btn btn-primary" disabled>Repartir Cartas</button>
         <button id="hit-button" class="btn btn-success" disabled>Tomar</button>
         <button id="stand-button" class="btn btn-danger" disabled>Plantarse</button>
         <h2>Tu Mano</h2>

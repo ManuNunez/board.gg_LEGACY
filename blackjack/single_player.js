@@ -197,8 +197,16 @@ class BlackjackGame {
 document.addEventListener('DOMContentLoaded', function () {
     const game = new BlackjackGame();
 
+    const setBetButton = document.getElementById('set-bet-button');
     const dealButton = document.getElementById('deal-button');
-    dealButton.addEventListener('click', function () {
+    const hitButton = document.getElementById('hit-button');
+    const standButton = document.getElementById('stand-button');
+
+    dealButton.disabled = true;
+    hitButton.disabled = true;
+    standButton.disabled = true;
+
+    setBetButton.addEventListener('click', function () {
         const betAmount = parseInt(document.getElementById('bet-input').value, 10);
 
         if (isNaN(betAmount) || betAmount < 5) {
@@ -206,19 +214,20 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        setBetButton.disabled = true;
+        dealButton.disabled = false;
+    });
+
+    dealButton.addEventListener('click', function () {
         game.dealInitialCards();
-        const hitButton = document.getElementById('hit-button');
-        const standButton = document.getElementById('stand-button');
         hitButton.disabled = false;
         standButton.disabled = false;
     });
 
-    const hitButton = document.getElementById('hit-button');
     hitButton.addEventListener('click', function () {
         game.playerHit();
     });
 
-    const standButton = document.getElementById('stand-button');
     standButton.addEventListener('click', function () {
         game.dealerHit();
     });
