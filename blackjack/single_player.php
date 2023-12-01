@@ -32,6 +32,7 @@ if ($isLoggedIn && isset($_POST['logout'])) {
             font-family: 'Ubuntu', sans-serif;
         }
     </style>
+    <link rel = "stylesheet" href = "styles.css">
     <link rel="stylesheet" href="../footer.css">
 </head>
 

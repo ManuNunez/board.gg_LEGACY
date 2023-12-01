@@ -1,19 +1,32 @@
 <?php
 session_start();
 
-
 $isLoggedIn = isset($_SESSION['username']);
 
+if (!$isLoggedIn) {
+    header('Location: login.php');
+    exit();
+}
 
-if ($isLoggedIn && isset($_POST['logout'])) {
+$usersData = file_get_contents('sources/bd/users.json');
+$usersArray = json_decode($usersData, true);
 
-    $_SESSION = array();
+$currentUsername = $_SESSION['username'];
+$currentUserData = $usersArray[$currentUsername];
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_profile'])) {
+    $currentUserData['fullname'] = $_POST['fullname'];
+    $currentUserData['email'] = $_POST['email'];
+    $currentUserData['phone'] = $_POST['phone'];
 
-    session_destroy();
+    if ($currentUserData['acount_tipe'] == 0) {
+        $currentUserData['chips'] = $_POST['chips'];
+    }
 
-  
-    header('Location: index.php');
+    $usersArray[$currentUsername] = $currentUserData;
+    file_put_contents('sources/bd/users.json', json_encode($usersArray, JSON_PRETTY_PRINT));
+
+    header('Location: profile.php');
     exit();
 }
 ?>
@@ -53,11 +66,9 @@ if ($isLoggedIn && isset($_POST['logout'])) {
                 </li>
                 <?php
                 if ($isLoggedIn) {
-                   
                     echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['username'] . '</a></li>';
                     echo '<form method="post" class="nav-item"><button type="submit" name="logout" class="btn btn-link nav-link">Logout</button></form>';
                 } else {
-                    
                     echo '<li class="nav-item"><a class="nav-link" href="login.php">Login/Sign-up</a></li>';
                 }
                 ?>
@@ -71,19 +82,34 @@ if ($isLoggedIn && isset($_POST['logout'])) {
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
-                <!-- Foto de perfil con clase rounded para bordes redondeados -->
-                <img src="ruta_a_la_foto_de_perfil.jpg" alt="Foto de perfil" class="img-fluid rounded">
+
             </div>
             <div class="col-md-8">
-                <!-- Información del usuario con clases de Bootstrap -->
-                <h2 class="mb-4">Nombre del Usuario</h2>
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Nombre:</strong> Nombre del Usuario</li>
-                    <li class="list-group-item"><strong>Nombre de usuario:</strong> nombredeusuario123</li>
-                    <li class="list-group-item"><strong>Cantidad de fichas:</strong> 5000</li>
-                    <li class="list-group-item"><strong>Fecha de Nacimiento:</strong> 01 de Enero de 1990</li>
-                    <li class="list-group-item"><strong>Correo:</strong> usuario@example.com</li>
-                </ul>
+                <!-- Formulario de edición del perfil -->
+                <h2 class="mb-4">Perfil de <?php echo $currentUsername; ?></h2>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="fullname">Nombre completo:</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $currentUserData['fullname']; ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $currentUserData['email']; ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono:</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $currentUserData['phone']; ?>" >
+                    </div>
+                    
+                    <?php if ($currentUserData['acount_tipe'] == 0): ?>
+                        <div class="form-group">
+                            <label for="chips">Cantidad de monedas:</label>
+                            <input type="number" class="form-control" id="chips" name="chips" value="<?php echo $currentUserData['chips']; ?>" >
+                        </div>
+                    <?php endif; ?>
+                    
+                    <button type="submit" name="edit_profile" class="btn btn-primary">Editar Perfil</button>
+                </form>
             </div>
         </div>
     </div>

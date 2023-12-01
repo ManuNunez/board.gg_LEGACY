@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         "email" => $email,
         "phone" => $phone,
         "birth_date" => $birth_date,
-        "acount_tipe" => "3"
+        "acount_tipe" => "3",
+        "chips" => "1000"
     );
 
     $users = json_decode(file_get_contents('sources/db/users.json'), true);

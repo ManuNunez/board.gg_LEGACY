@@ -37,7 +37,7 @@ class FaceCard extends Card {
 class Deck {
     constructor() {
         this._suits = ['H', 'D', 'C', 'S'];
-        this._values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        this._values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         this._cards = [];
 
         this._suits.forEach(suit => {

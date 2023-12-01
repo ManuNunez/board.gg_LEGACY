@@ -91,14 +91,14 @@ if ($isLoggedIn && isset($_POST['logout'])) {
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/350x150" class="d-block w-100" alt="Card image">
+                    <img src="/sources/img/blackjack.png" class="d-block w-100" alt="Card image">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>BLACKJACK</h5>
                         <p>Disfruta del clásico juego de blackjack y compite contra el crupier.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/350x150" class="d-block w-100" alt="Card image">
+                    <img src="/sources/img/carta_alta.png" class="d-block w-100" alt="Card image">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>CARTA ALTA</h5>
                         <p>Demuestra tu habilidad con las cartas y gana con la carta más alta.</p>

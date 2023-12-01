@@ -25,14 +25,15 @@ if ($isLoggedIn && isset($_POST['logout'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOARD.GG</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+    <link rel = "stylesheet" href = "styles.css">
     <style>
         body {
             font-family: 'Ubuntu', sans-serif;
         }
     </style>
-    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="../footer.css">
 </head>
 
 <body>
